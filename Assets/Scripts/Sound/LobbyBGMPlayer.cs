@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class LobbyBGMPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Header("로비 BGM 설정")]
+    [SerializeField] private AudioClip lobbyBGM;
+
+    [Range(0f, 1f)][SerializeField] private float volume = 0.3f;
+    [Range(0.1f, 3f)][SerializeField] private float pitch = 1f;
     void Start()
     {
-        
+        BGMManager.instance.PlayBGM(lobbyBGM);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (BGMManager.instance != null)
+        {
+            BGMManager.instance.SetVolume(volume);
+            BGMManager.instance.SetPitch(pitch);
+        }
     }
 }

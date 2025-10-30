@@ -23,13 +23,16 @@ public class BGMManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(AudioClip clip, float vol = 0.5f)
+    public void PlayBGM(AudioClip clip)
     {
-        if (bgmSource.clip == clip) return; //이미 재생중인 BGM이면 무시
+        if (bgmSource.clip == clip)
+        {
+            return;
+        } //이미 재생중인 BGM이면 무시
 
         bgmSource.clip = clip;
-        bgmSource.volume = vol;
         bgmSource.Play();
+
     }
 
     public void StopBGM()
