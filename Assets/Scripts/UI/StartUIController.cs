@@ -15,7 +15,6 @@ public class StartUIController : BaseUIButtonController
 
     private void OnStartPressed()
     {
-        Debug.Log("게임 시작 버튼 클릭됨");
         UIManager.Instance?.LoadScene("MainScene");
     }
 

@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName)) return;
+        Debug.Log($"{sceneName} 버튼 클릭됨");
         SceneManager.LoadScene(sceneName);
     }
 }
