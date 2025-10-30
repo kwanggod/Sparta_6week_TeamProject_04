@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static UIManager Instance { get; private set; }
 
     private void Awake()
     {
-        // DDOL ½Ì±ÛÅæ ÆĞÅÏ ±¸Çö
+        // DDOL ì‹±ê¸€í†¤ íŒ¨í„´ êµ¬í˜„
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // ¾À ÀüÈ¯ À¯Æ¿
+    // ì”¬ ì „í™˜ ìœ í‹¸
     public void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName)) return;
