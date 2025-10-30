@@ -34,10 +34,19 @@ public class PlayerMove : MonoBehaviour
             Jump();
         }
 
-        if(isGrounded && (Input.GetButtonDown("Slide") || Input.GetKeyDown(KeyCode.C)))
+        if (!isSlide && Input.GetKeyDown(KeyCode.C)) // || Input.GetButtonDown("Slide") 나중에 슬라이드 버튼 추가되면 넣기
         {
             Slide();
         }
+            if (isSlide)
+            {
+                slideTimer += Time.deltaTime;
+                if (slideTimer >= slideDuration)
+                {
+                    isSlide = false;
+                }
+            }
+        
 
 
         animator.SetBool("isGrounded", isGrounded);
@@ -61,11 +70,13 @@ public class PlayerMove : MonoBehaviour
 
     void Slide()
     {
-        slideTimer += Time.deltaTime;
-        if(slideTimer >= slideDuration)
+        if(!isSlide)
         {
-            isSlide = false;
+            isSlide = true;
+            slideTimer = 0f;
+            animator.SetTrigger("Slide");
         }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
