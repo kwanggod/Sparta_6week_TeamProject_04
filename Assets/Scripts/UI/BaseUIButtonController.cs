@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public abstract class BaseUIButtonController : MonoBehaviour
 {
-    // ¹öÆ°°ú ±× ¹öÆ°ÀÌ ´­·ÈÀ» ¶§ ½ÇÇàÇÒ ActionÀ» ÀúÀåÇÏ´Â Å¬·¡½º
+    // ë²„íŠ¼ê³¼ ê·¸ ë²„íŠ¼ì´ ëˆŒë ¸ì„ ë•Œ ì‹¤í–‰í•  Actionì„ ì €ì¥í•˜ëŠ” í´ë˜ìŠ¤
     private class ButtonListener
     {
         public Button button;
@@ -13,12 +13,12 @@ public abstract class BaseUIButtonController : MonoBehaviour
 
     private readonly List<ButtonListener> buttonListeners = new List<ButtonListener>();
 
-    // ¹öÆ°À» ¾ÈÀüÇÏ°Ô µî·ÏÇÏ´Â ÇÔ¼ö
+    // ë²„íŠ¼ì„ ì•ˆì „í•˜ê²Œ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜
     protected void RegisterButton(Button button, UnityEngine.Events.UnityAction action)
     {
         if (button == null)
         {
-            Debug.LogWarning($"{name}: µî·ÏÇÏ·Á´Â ¹öÆ°ÀÌ nullÀÔ´Ï´Ù!");
+            Debug.LogWarning($"{name}: ë“±ë¡í•˜ë ¤ëŠ” ë²„íŠ¼ì´ nullì…ë‹ˆë‹¤!");
             return;
         }
 
@@ -26,7 +26,7 @@ public abstract class BaseUIButtonController : MonoBehaviour
         buttonListeners.Add(new ButtonListener { button = button, action = action });
     }
 
-    // ¸ğµç µî·ÏµÈ ¹öÆ° ¸®½º³Ê¸¦ ÇØÁ¦
+    // ëª¨ë“  ë“±ë¡ëœ ë²„íŠ¼ ë¦¬ìŠ¤ë„ˆë¥¼ í•´ì œ
     protected virtual void OnDestroy()
     {
         foreach (var listener in buttonListeners)
