@@ -6,9 +6,12 @@ public class PlayerMove : MonoBehaviour
 {
     public Animator animator;
     public bool isGrounded;
+    public bool isSlide;
     public int jumpCount = 0;
     public int maxJumpCount = 2;
     public float jumpForce = 5f;
+    public float slideDuration = 1f;
+    private float slideTimer = 0f;
     private Rigidbody2D _rigidbody2D;
     public int maxHp = 100;
     public int currentHp;
@@ -26,12 +29,20 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X)) // 버튼 이름에 맞게 수정
+        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // 버튼 이름에 맞게 수정
         {
             Jump();
         }
+
+        if(isGrounded && (Input.GetButtonDown("Slide") || Input.GetKeyDown(KeyCode.C)))
+        {
+            Slide();
+        }
+
+
         animator.SetBool("isGrounded", isGrounded);
         animator.SetBool("isJump", !isGrounded);
+        animator.SetBool("isSlide", isSlide);
 
         tickTimer += Time.deltaTime;
         if (tickTimer >= tickRate)
@@ -46,6 +57,15 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         jumpCount++;
         isGrounded = false;
+    }
+
+    void Slide()
+    {
+        slideTimer += Time.deltaTime;
+        if(slideTimer >= slideDuration)
+        {
+            isSlide = false;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
