@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public bool IsPlaying { get; private set; } //게임 진행 여부
     public int score { get; private set; } //점수
 
+    public int groundSpeed { get; private set; }
+
     private void Awake()
     {
         if (instance == null)
@@ -37,4 +39,9 @@ public class GameManager : MonoBehaviour
     {
         IsPlaying = false;
     }
+    public void SetGroundSpeed(int speed)
+    {
+        groundSpeed += speed;
+    }
+
 }
