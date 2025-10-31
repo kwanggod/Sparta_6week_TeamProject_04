@@ -36,7 +36,7 @@ public class Item : MonoBehaviour
                 }
                 else if (tileName == "hud_heart")
                 {
-                    //other.GetComponent<PlayerMove>().Heal(20);
+                    other.GetComponent<PlayerMove>().Heal(10);
                     Debug.Log("체력회복");
                 }
 
