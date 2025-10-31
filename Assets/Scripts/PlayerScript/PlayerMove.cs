@@ -18,11 +18,20 @@ public class PlayerMove : MonoBehaviour
     public float tickRate = 1f;
     public int tickDamage = 1;
     private float tickTimer = 0f;
+    private BoxCollider2D playerCollider;
+    private Vector2 originalColliderSize;
+    private Vector2 originalColliderOffset;
+    public Vector2 sliderColliderSize = new Vector2(1f, 1f);
+    public Vector2 sliderColliderOffset = new Vector2(0f, -0.32f);
+
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        playerCollider = GetComponent<BoxCollider2D>();
+        originalColliderSize = playerCollider.size;
+        originalColliderOffset = playerCollider.offset;
         currentHp = maxHp;
     }
 
@@ -42,6 +51,8 @@ public class PlayerMove : MonoBehaviour
         if(isSlide && Input.GetKeyUp(KeyCode.C))
         {
             isSlide = false;
+            playerCollider.size = originalColliderSize;
+            playerCollider.offset = originalColliderOffset;
         }
         
 
@@ -73,6 +84,8 @@ public class PlayerMove : MonoBehaviour
             isSlide = true;
             slideTimer = 0f;
             animator.SetTrigger("isSlide");
+            playerCollider.size = sliderColliderSize;
+            playerCollider.offset = sliderColliderOffset;
         }
 
     }
