@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public bool isSlide;
     public int jumpCount = 0;
     public int maxJumpCount = 2;
-    public float jumpForce = 5f;
+    public float jumpForce = 10f;
     public float slideDuration = 1f;
     private float slideTimer = 0f;
     private Rigidbody2D _rigidbody2D;
@@ -23,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 originalColliderOffset;
     public Vector2 sliderColliderSize = new Vector2(1f, 0.8f);
     public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
+    public float dieOffsetY = -15f;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,10 @@ public class PlayerMove : MonoBehaviour
             playerCollider.offset = originalColliderOffset;
         }
 
+        if (transform.position.y < dieOffsetY)
+        {
+            Die();
+        }
 
 
 
@@ -68,6 +74,10 @@ public class PlayerMove : MonoBehaviour
             tickTimer = 0f;
             TakeDamage(tickDamage);
         }
+
+
+
+
     }
 
     void Jump()
@@ -102,7 +112,7 @@ public class PlayerMove : MonoBehaviour
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            currentHp = 0; // isDie 추가 예정
+            currentHp = 0;
 
         }
     }
@@ -113,6 +123,12 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("체력 회복됨: " + currentHp);
     }
 
+    public void Die()
+    {
+        currentHp = 0;
+        _rigidbody2D.velocity = Vector2.zero;
+        //애니메이션 추가 예정
+    }
     public void TryJump() //모바일 버튼 용 메써드
     {
         if (maxJumpCount > jumpCount && isGrounded)

@@ -1982,8 +1982,8 @@ Transform:
   m_GameObject: {fileID: 225543400}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13, y: -4.01, z: 0}
-  m_LocalScale: {x: 1, y: 0.61, z: 1}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalScale: {x: 2.5, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1684434073}
@@ -2041,7 +2041,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -50
-  m_Sprite: {fileID: 21300000, guid: 3c434908766e2b6478498c275075077b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 664505188fa2543448ba784d9f6d99a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -40715,7 +40715,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.94117653, g: 0.5686275, b: 0.14117648, a: 1}
+  m_BackGroundColor: {r: 0.5529412, g: 0.2392157, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -41211,8 +41211,8 @@ GameObject:
   - component: {fileID: 1692809635}
   - component: {fileID: 1692809634}
   - component: {fileID: 1692809633}
-  - component: {fileID: 1692809632}
   - component: {fileID: 1692809631}
+  - component: {fileID: 1692809636}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -41265,31 +41265,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.2}
   m_EdgeRadius: 0
---- !u!114 &1692809632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692809630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b73c9db7f71354c81687a214c203bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  isGrounded: 0
-  isSlide: 0
-  jumpCount: 0
-  maxJumpCount: 2
-  jumpForce: 10
-  slideDuration: 0.1
-  maxHp: 100
-  currentHp: 0
-  tickRate: 1
-  tickDamage: 1
-  sliderColliderSize: {x: 1, y: 1}
-  sliderColliderOffset: {x: 0, y: -0.32}
 --- !u!50 &1692809633
 Rigidbody2D:
   serializedVersion: 4
@@ -41368,6 +41343,31 @@ Transform:
   - {fileID: 1495073240}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692809636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692809630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b73c9db7f71354c81687a214c203bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  isGrounded: 0
+  isSlide: 0
+  jumpCount: 0
+  maxJumpCount: 2
+  jumpForce: 10
+  slideDuration: 1
+  maxHp: 100
+  currentHp: 0
+  tickRate: 1
+  tickDamage: 1
+  sliderColliderSize: {x: 1, y: 0.8}
+  sliderColliderOffset: {x: 0, y: -0.4}
 --- !u!1 &2075534418
 GameObject:
   m_ObjectHideFlags: 0
