@@ -36,7 +36,7 @@ public class Item : MonoBehaviour
                 }
                 else if (tileName == "conveyor")
                 {
-                    GameManager.instance.BoostSpeed(5f,5f);//밸런스 조정
+                    GameManager.instance.BoostSpeed(5f,5f);//밸런스 조정 첫번째 속도, 두번째 초
                     Debug.Log("스피드 증가");
                 }
                 else if (tileName == "hud_heart")
