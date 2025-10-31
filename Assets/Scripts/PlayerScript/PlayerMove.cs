@@ -106,6 +106,12 @@ public class PlayerMove : MonoBehaviour
 
         }
     }
+    public void Heal(int heal)
+    {
+        currentHp += heal;
+        currentHp = Mathf.Min(currentHp, maxHp);
+        Debug.Log("체력 회복됨: " + currentHp);
+    }
 
 
 
