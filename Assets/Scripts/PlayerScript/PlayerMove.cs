@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 originalColliderOffset;
     public Vector2 sliderColliderSize = new Vector2(1f, 0.8f);
     public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
+    public float dieOffsetY = -15f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,14 +49,18 @@ public class PlayerMove : MonoBehaviour
         {
             Slide();
         }
-        
-        if(isSlide && Input.GetKeyUp(KeyCode.C))
+
+        if (isSlide && Input.GetKeyUp(KeyCode.C))
         {
             isSlide = false;
             playerCollider.size = originalColliderSize;
             playerCollider.offset = originalColliderOffset;
         }
-        
+
+        if (transform.position.y < dieOffsetY)
+        {
+            Die();
+        }
 
 
 
@@ -68,6 +74,10 @@ public class PlayerMove : MonoBehaviour
             tickTimer = 0f;
             TakeDamage(tickDamage);
         }
+
+
+
+
     }
 
     void Jump()
@@ -97,12 +107,12 @@ public class PlayerMove : MonoBehaviour
             jumpCount = 0; // 착지 후 카운트 초기화
         }
     }
-    public void TakeDamage(int damage)  
+    public void TakeDamage(int damage)
     {
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            currentHp = 0; // isDie 추가 예정
+            currentHp = 0; 
 
         }
     }
@@ -113,6 +123,12 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("체력 회복됨: " + currentHp);
     }
 
+    public void Die()
+    {
+        currentHp = 0;
+        _rigidbody2D.velocity = Vector2.zero;
+        //애니메이션 추가 예정
+    }
 
 
 }
