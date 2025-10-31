@@ -47,14 +47,14 @@ public class PlayerMove : MonoBehaviour
         {
             Slide();
         }
-        
-        if(isSlide && Input.GetKeyUp(KeyCode.C))
+
+        if (isSlide && Input.GetKeyUp(KeyCode.C))
         {
             isSlide = false;
             playerCollider.size = originalColliderSize;
             playerCollider.offset = originalColliderOffset;
         }
-        
+
 
 
 
@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviour
             jumpCount = 0; // 착지 후 카운트 초기화
         }
     }
-    public void TakeDamage(int damage)  
+    public void TakeDamage(int damage)
     {
         currentHp -= damage;
         if (currentHp <= 0)
@@ -113,6 +113,21 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("체력 회복됨: " + currentHp);
     }
 
+    public void TryJump() //모바일 버튼 용 메써드
+    {
+        if (maxJumpCount > jumpCount && isGrounded)
+        {
+            Jump();
+        }
+    }
 
+    public void TrySlide()
+    {
+        if (!isSlide && isGrounded)
+        {
+            Slide();
+        }
+
+    }
 
 }

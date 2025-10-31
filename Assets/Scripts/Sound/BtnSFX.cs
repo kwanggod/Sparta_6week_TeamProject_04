@@ -17,7 +17,6 @@ public class BtnSFX : MonoBehaviour
         button.onClick.AddListener(PlayClickSound);
     }
 
-    // Update is called once per frame
     private void PlayClickSound()
     {
         if (SFXManager.instance != null)

@@ -28,5 +28,13 @@ public class SFXManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, Mathf.Clamp01(vol));
     }
 
-    public void PlaySound() => PlaySFX(null); //사운드 재생 테스트
+    public void SetVolume(float vol)
+    {
+        sfxSource.volume = vol;
+    }
+
+    public float GetVolume()
+    {
+        return sfxSource.volume;
+    }
 }
