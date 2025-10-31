@@ -14,12 +14,15 @@ public class BtnSFX : MonoBehaviour
     void Awake()
     {
         button = GetComponent<Button>();
+        button.onClick.AddListener(PlayClickSound);
     }
 
     // Update is called once per frame
     private void PlayClickSound()
     {
-        if (SFXManager.instance == null) return;
-        SFXManager.instance.PlaySFX(btnSFX, volume);
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.PlaySFX(btnSFX, volume);
+        }
     }
 }
