@@ -29,23 +29,21 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // ��ư �̸��� �°� ����
+        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // 버튼 이름에 맞게 변경
         {
             Jump();
         }
 
-        if (!isSlide && Input.GetKey(KeyCode.C)) // || Input.GetButtonDown("Slide") ���߿� �����̵� ��ư �߰��Ǹ� �ֱ�
+        if (!isSlide && Input.GetKey(KeyCode.C)) // || Input.GetButtonDown("Slide") 추후 슬라이드 버튼 추가하면 같이 추가
         {
             Slide();
         }
-        if (isSlide)
+        
+        if(isSlide && Input.GetKeyUp(KeyCode.C))
         {
-            slideTimer += Time.deltaTime;
-            if (slideTimer >= slideDuration)
-            {
-                isSlide = false;
-            }
+            isSlide = false;
         }
+        
 
 
 
