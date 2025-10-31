@@ -19,12 +19,11 @@ public class GroundMove : MonoBehaviour
     {
         groundTran.position -= new Vector3(GameManager.instance.groundSpeed * Time.deltaTime, 0, 0);
         speedUp += Time.deltaTime;
-        if(speedUp >= 10f)
+        if(speedUp >= 20f)
         {
-            GameManager.instance.SetGroundSpeed(1);
+            GameManager.instance.SetGroundSpeed(0.5f);
             speedUp = 0;
             Debug.Log("속도증가");
         }
-            
     }
 }
