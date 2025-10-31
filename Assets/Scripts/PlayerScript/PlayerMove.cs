@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     public bool isSlide;
     public int jumpCount = 0;
     public int maxJumpCount = 2;
-    public float jumpForce = 5f;
+    public float jumpForce = 10f;
     public float slideDuration = 1f;
     private float slideTimer = 0f;
     private Rigidbody2D _rigidbody2D;
