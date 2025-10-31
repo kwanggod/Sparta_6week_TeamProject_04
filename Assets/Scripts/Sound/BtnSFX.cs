@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class BtnSFX : MonoBehaviour
+{
+    [Header("버튼 클릭 사운드 설정")]
+    [SerializeField] private AudioClip btnSFX;
+    [Range(0f, 1f)][SerializeField] private float volume = 1f;
+
+    private Button button;
+
+    void Awake()
+    {
+        button = GetComponent<Button>();
+    }
+
+    // Update is called once per frame
+    private void PlayClickSound()
+    {
+        if (SFXManager.instance == null) return;
+        SFXManager.instance.PlaySFX(btnSFX, volume);
+    }
+}
