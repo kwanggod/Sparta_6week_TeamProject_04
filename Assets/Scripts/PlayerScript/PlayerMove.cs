@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
     private BoxCollider2D playerCollider;
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
-    public Vector2 sliderColliderSize = new Vector2(1f, 1f);
-    public Vector2 sliderColliderOffset = new Vector2(0f, -0.32f);
+    public Vector2 sliderColliderSize = new Vector2(1f, 0.8f);
+    public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
 
     // Start is called before the first frame update
     void Start()
@@ -91,18 +91,18 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))  // �ٴ� �̸��� �°� ����
+        if (collision.gameObject.CompareTag("Ground"))  // 태그 Ground 로
         {
             isGrounded = true;
-            jumpCount = 0; // ���� �� ���� ī��Ʈ �ʱ�ȭ
+            jumpCount = 0; // 착지 후 카운트 초기화
         }
     }
-    public void TakeDamage(int damage)  // ���߿� ���� ����
+    public void TakeDamage(int damage)  
     {
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            currentHp = 0; // ���� Die �߰�
+            currentHp = 0; // isDie 추가 예정
 
         }
     }
