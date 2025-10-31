@@ -29,24 +29,24 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // ¹öÆ° ÀÌ¸§¿¡ ¸Â°Ô ¼öÁ¤
+        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // ï¿½ï¿½Æ° ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             Jump();
         }
 
-        if (!isSlide && Input.GetKeyDown(KeyCode.C)) // || Input.GetButtonDown("Slide") ³ªÁß¿¡ ½½¶óÀÌµå ¹öÆ° Ãß°¡µÇ¸é ³Ö±â
+        if (!isSlide && Input.GetKey(KeyCode.C)) // || Input.GetButtonDown("Slide") ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Æ° ï¿½ß°ï¿½ï¿½Ç¸ï¿½ ï¿½Ö±ï¿½
         {
             Slide();
         }
-            if (isSlide)
+        if (isSlide)
+        {
+            slideTimer += Time.deltaTime;
+            if (slideTimer >= slideDuration)
             {
-                slideTimer += Time.deltaTime;
-                if (slideTimer >= slideDuration)
-                {
-                    isSlide = false;
-                }
+                isSlide = false;
             }
-        
+        }
+
 
 
         animator.SetBool("isGrounded", isGrounded);
@@ -70,32 +70,32 @@ public class PlayerMove : MonoBehaviour
 
     void Slide()
     {
-        if(!isSlide)
+        if (!isSlide)
         {
             isSlide = true;
             slideTimer = 0f;
-            animator.SetTrigger("Slide");
+            animator.SetTrigger("isSlide");
         }
-        
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))  // ¹Ù´Ú ÀÌ¸§¿¡ ¸Â°Ô ¼öÁ¤
+        if (collision.gameObject.CompareTag("Ground"))  // ï¿½Ù´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             isGrounded = true;
-            jumpCount = 0; // ÂøÁö ½Ã Á¡ÇÁ Ä«¿îÆ® ÃÊ±âÈ­
+            jumpCount = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
         }
     }
-    public void TakeDamage(int damage)  // ³ªÁß¿¡ ÂüÁ¶ °¡´É
+    public void TakeDamage(int damage)  // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            currentHp = 0; // ÃßÈÄ Die Ãß°¡
-           
+            currentHp = 0; // ï¿½ï¿½ï¿½ï¿½ Die ï¿½ß°ï¿½
+
         }
     }
 
-    
-    
+
+
 }

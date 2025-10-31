@@ -211,7 +211,7 @@ MonoBehaviour:
   jumpCount: 0
   maxJumpCount: 2
   jumpForce: 5
-  slideDuration: 1
+  slideDuration: 0.1
   maxHp: 100
   currentHp: 0
   tickRate: 1
