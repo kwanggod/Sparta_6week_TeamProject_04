@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
-// StartScene Àü¿ë UI ÄÁÆ®·Ñ·¯
+// StartScene ì „ìš© UI ì»¨íŠ¸ë¡¤ëŸ¬
 public class StartUIController : BaseUIButtonController
 {
     [SerializeField] private Button startButton;
@@ -15,19 +15,18 @@ public class StartUIController : BaseUIButtonController
 
     private void OnStartPressed()
     {
-        Debug.Log("°ÔÀÓ ½ÃÀÛ ¹öÆ° Å¬¸¯µÊ");
         UIManager.Instance?.LoadScene("MainScene");
     }
 
     private void OnExitPressed()
     {
-        Debug.Log("°ÔÀÓ Á¾·á ¹öÆ° Å¬¸¯µÊ");
+        Debug.Log("ê²Œì„ ì¢…ë£Œ ë²„íŠ¼ í´ë¦­ë¨");
 
 #if UNITY_EDITOR
-        // ¿¡µğÅÍ¿¡¼­ Å×½ºÆ®ÇÒ ¶§´Â Play¸ğµå Áß´Ü
+        // ì—ë””í„°ì—ì„œ í…ŒìŠ¤íŠ¸í•  ë•ŒëŠ” Playëª¨ë“œ ì¤‘ë‹¨
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        // ºôµåµÈ È¯°æ¿¡¼­´Â ¾Û Á¾·á
+        // ë¹Œë“œëœ í™˜ê²½ì—ì„œëŠ” ì•± ì¢…ë£Œ
         Application.Quit();
 #endif
     }
