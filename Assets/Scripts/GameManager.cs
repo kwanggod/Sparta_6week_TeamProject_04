@@ -43,5 +43,15 @@ public class GameManager : MonoBehaviour
     {
         groundSpeed += speed;
     }
+    public void BoostSpeed(float speed, float count)
+    {
+        StartCoroutine(SpeedBoost(speed, count));
+    }
 
+    private IEnumerator SpeedBoost(float speed, float count)
+    {
+        groundSpeed += speed;
+        yield return new WaitForSeconds(count);
+        groundSpeed -= speed;
+    }
 }
