@@ -27,9 +27,9 @@ public class PlayerMove : MonoBehaviour
     public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
     public float dieOffsetY = -15f;
 
-    public LayerMask groundLayer; // 레이어 설정
-    public float groundCheckDistance = 0.1f; // raycast 길이 
-    public Vector2 groundCheckOffset = new Vector2(0f, -0.6f); // 레이저 쏘는 위치 n만큼 내림
+    //public LayerMask groundLayer; // 레이어 설정
+    //public float groundCheckDistance = 0.1f; // raycast 길이 
+    //public Vector2 groundCheckOffset = new Vector2(0f, -0.6f); // 레이저 쏘는 위치 n만큼 내림
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GroundCheck();
+        //GroundCheck();
 
         if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // 버튼 이름에 맞게 변경
         {
@@ -106,14 +106,19 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))  // 태그 Ground 로
         {
-            isGrounded = true;
-            jumpCount = 0; // 착지 후 카운트 초기화
+          
+            Vector3 vector3 = _rigidbody2D.velocity;
+            if (vector3 == Vector3.zero)
+            {
+                isGrounded = true;
+                jumpCount = 0; // 착지 후 카운트 초기화
+            }
         }
-    }*/
+    }
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
@@ -154,7 +159,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void GroundCheck() // raycast 발사하여 그라운드 체크  2층 무한점프 방지용 코드
+   /* void GroundCheck() // raycast 발사하여 그라운드 체크  2층 무한점프 방지용 코드
     {
 
         float halfHeight = playerCollider.bounds.extents.y;
@@ -178,5 +183,5 @@ public class PlayerMove : MonoBehaviour
 
         Debug.DrawRay(leftRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
         Debug.DrawRay(rightRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
-    }
+    }*/
 }

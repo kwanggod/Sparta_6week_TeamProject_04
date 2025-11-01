@@ -2535,7 +2535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2146e52e83f4241ba22d8a7b97bf39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 0}
+  uiPrefab: {fileID: 7464831048771343106, guid: 2df6928f5b07dda4f8ddb544161d7fe8, type: 3}
 --- !u!4 &1869073918
 Transform:
   m_ObjectHideFlags: 0
