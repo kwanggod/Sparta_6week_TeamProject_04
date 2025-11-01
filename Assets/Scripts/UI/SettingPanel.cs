@@ -1,15 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingPanel : MonoBehaviour
+public class SettingPanel : BaseUIButtonController
 {
     [Header("소리 설정 슬라이더")]
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
     [Header("버튼")]
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button panelCloseButton;
     [SerializeField] private Button exitButton;
 
     void Start()
@@ -23,8 +24,10 @@ public class SettingPanel : MonoBehaviour
         bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
 
-        closeButton.onClick.AddListener(ClosePanel);
-        exitButton.onClick.AddListener(ExitGame);
+        RegisterButton(closeButton, ClosePanel);
+        RegisterButton(panelCloseButton, ClosePanel);
+        RegisterButton(exitButton, ExitGame);
+
     }
 
     private void OnBGMVolumeChanged(float value)
