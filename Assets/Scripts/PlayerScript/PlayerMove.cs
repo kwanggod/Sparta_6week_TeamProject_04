@@ -28,10 +28,8 @@ public class PlayerMove : MonoBehaviour
     public float dieOffsetY = -15f;
 
     public LayerMask groundLayer; // 레이어 설정
-    public float groundCheckDistance; // raycast 길이 
-    public Vector2 groundCheckOffset = new Vector2(0f, -1f); // 레이저 쏘는 위치 n만큼 내림
-    private float groundIgnoreTime = 0f;
-    public float groundIgnoreDuration = 0.25f;
+    public float groundCheckDistance = 0.1f; // raycast 길이 
+    public Vector2 groundCheckOffset = new Vector2(0f, -0.6f); // 레이저 쏘는 위치 n만큼 내림
 
     // Start is called before the first frame update
     void Start()
@@ -94,7 +92,6 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         jumpCount++;
         isGrounded = false;
-        groundIgnoreTime = groundIgnoreDuration;
     }
 
     void Slide()
@@ -109,14 +106,14 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))  // 태그 Ground 로
         {
             isGrounded = true;
             jumpCount = 0; // 착지 후 카운트 초기화
         }
-    }
+    }*/
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
@@ -159,17 +156,11 @@ public class PlayerMove : MonoBehaviour
 
     void GroundCheck() // raycast 발사하여 그라운드 체크  2층 무한점프 방지용 코드
     {
-        if(groundIgnoreTime > 0)
-        {
-            groundIgnoreTime -= Time.deltaTime;
-            isGrounded = false;
-            return;
-        }
-
 
         float halfHeight = playerCollider.bounds.extents.y;
-        float halfwidth = playerCollider.bounds.extents.x;
-        Vector2 center = (Vector2)transform.position + groundCheckOffset;
+        float halfwidth = playerCollider.bounds.extents.x * 0.9f;
+        Bounds bounds = playerCollider.bounds;
+        Vector2 center = new Vector2(bounds.center.x, bounds.min.y) + groundCheckOffset;
         Vector2 leftRayPoint = center + Vector2.left * halfwidth;
         Vector2 rightRayPoint = center + Vector2.right * halfwidth;
 
