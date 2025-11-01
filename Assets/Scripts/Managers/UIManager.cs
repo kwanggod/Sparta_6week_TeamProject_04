@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
 {
     // 싱글톤 인스턴스
     public static UIManager Instance { get; private set; }
+    [SerializeField] private GameObject optionPanel;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(optionPanel);
     }
 
     // 씬 전환 유틸
@@ -25,6 +27,22 @@ public class UIManager : MonoBehaviour
         if (string.IsNullOrEmpty(sceneName)) return;
         Debug.Log($"{sceneName} 버튼 클릭됨");
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void ShowOptionPanel()
+    {
+        if (optionPanel == null)
+        {
+            Debug.LogWarning("옵션 패널이 Null입니다!");
+            return;
+        }
+        optionPanel.SetActive(true);
+    }
+
+    public void HideOptionPanel()
+    {
+        if (optionPanel == null) return;
+        optionPanel.SetActive(false);
     }
 }
 
