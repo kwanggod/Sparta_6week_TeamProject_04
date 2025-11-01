@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            currentHp = 0; 
+            currentHp = 0;
 
         }
     }
@@ -129,6 +129,21 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
         //애니메이션 추가 예정
     }
+    public void TryJump() //모바일 버튼 용 메써드
+    {
+        if (maxJumpCount > jumpCount && isGrounded)
+        {
+            Jump();
+        }
+    }
 
+    public void TrySlide()
+    {
+        if (!isSlide && isGrounded)
+        {
+            Slide();
+        }
+
+    }
 
 }

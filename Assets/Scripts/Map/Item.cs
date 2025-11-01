@@ -24,29 +24,35 @@ public class Item : MonoBehaviour
             {
                 string tileName = tile.name;
 
+                var sfx = GetComponent<ItemSFX>();
+
                 if (tileName == "gem_blue")
                 {
-                    GameManager.instance.AddScore(1000);//¹ë·±½º Á¶Á¤
+                    GameManager.instance.AddScore(1000);//ï¿½ë·±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Debug.Log(GameManager.instance.score);
+                    sfx?.PlayItemSound();
                 }
                 if (tileName == "gem_red")
                 {
-                    GameManager.instance.AddScore(5000);//¹ë·±½º Á¶Á¤
+                    GameManager.instance.AddScore(5000);//ï¿½ë·±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Debug.Log(GameManager.instance.score);
+                    sfx?.PlayItemSound();
                 }
                 else if (tileName == "conveyor")
                 {
-                    GameManager.instance.BoostSpeed(5f,5f);//¹ë·±½º Á¶Á¤ Ã¹¹øÂ° ¼Óµµ, µÎ¹øÂ° ÃÊ
-                    Debug.Log("½ºÇÇµå Áõ°¡");
+                    GameManager.instance.BoostSpeed(5f, 5f);//ï¿½ë·±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Óµï¿½, ï¿½Î¹ï¿½Â° ï¿½ï¿½
+                    Debug.Log("ï¿½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½ï¿½");
+                    sfx?.PlayItemSound();
                 }
                 else if (tileName == "hud_heart")
                 {
-                    other.GetComponent<PlayerMove>().Heal(10);//¹ë·±½º Á¶Á¤
-                    Debug.Log("Ã¼·ÂÈ¸º¹");
+                    other.GetComponent<PlayerMove>().Heal(10);//ï¿½ë·±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    Debug.Log("Ã¼ï¿½ï¿½È¸ï¿½ï¿½");
+                    sfx?.PlayItemSound();
                 }
 
                 itemTilemap.SetTile(cellPos, null);
-                
+
             }
 
         }

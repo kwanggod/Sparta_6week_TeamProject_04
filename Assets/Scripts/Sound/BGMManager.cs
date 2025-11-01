@@ -50,4 +50,9 @@ public class BGMManager : MonoBehaviour
     {
         bgmSource.pitch = Mathf.Clamp(pitch, 0.1f, 3f);
     }
+
+    public float GetVolume()
+    {
+        return bgmSource.volume;
+    }
 }
