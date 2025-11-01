@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +27,12 @@ public class PlayerMove : MonoBehaviour
     public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
     public float dieOffsetY = -15f;
 
+    public LayerMask groundLayer; // 레이어 설정
+    public float groundCheckDistance; // raycast 길이 
+    public Vector2 groundCheckOffset = new Vector2(0f, -1f); // 레이저 쏘는 위치 n만큼 내림
+    private float groundIgnoreTime = 0f;
+    public float groundIgnoreDuration = 0.25f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +47,8 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GroundCheck();
+
         if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // 버튼 이름에 맞게 변경
         {
             Jump();
@@ -85,6 +94,7 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         jumpCount++;
         isGrounded = false;
+        groundIgnoreTime = groundIgnoreDuration;
     }
 
     void Slide()
@@ -127,7 +137,8 @@ public class PlayerMove : MonoBehaviour
     {
         currentHp = 0;
         _rigidbody2D.velocity = Vector2.zero;
-        //애니메이션 추가 예정
+        Debug.Log("Player Die");
+        //애니메이션 추가 예정? 혹은 바로 결과창?
     }
     public void TryJump() //모바일 버튼 용 메써드
     {
@@ -146,4 +157,35 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    void GroundCheck() // raycast 발사하여 그라운드 체크  2층 무한점프 방지용 코드
+    {
+        if(groundIgnoreTime > 0)
+        {
+            groundIgnoreTime -= Time.deltaTime;
+            isGrounded = false;
+            return;
+        }
+
+
+        float halfHeight = playerCollider.bounds.extents.y;
+        float halfwidth = playerCollider.bounds.extents.x;
+        Vector2 center = (Vector2)transform.position + groundCheckOffset;
+        Vector2 leftRayPoint = center + Vector2.left * halfwidth;
+        Vector2 rightRayPoint = center + Vector2.right * halfwidth;
+
+        RaycastHit2D leftHit = Physics2D.Raycast(leftRayPoint, Vector2.down, groundCheckDistance, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(rightRayPoint, Vector2.down, groundCheckDistance, groundLayer);
+
+        bool wasGrounded = isGrounded;
+        isGrounded = (leftHit.collider != null) || (rightHit.collider != null);
+
+
+        if(isGrounded && !wasGrounded)
+        {
+            jumpCount = 0;
+        }
+
+        Debug.DrawRay(leftRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+        Debug.DrawRay(rightRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+    }
 }
