@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,6 @@ public class BackGroundMove : MonoBehaviour
     void Update()
     {
         offsetX += GameManager.instance.groundSpeed*0.0001f;
-        rend.material.mainTextureOffset = new Vector2(offsetX, 0);
+        rend.material.mainTextureOffset = new Vector2(offsetX * Time.deltaTime, 0);
     }
 }
