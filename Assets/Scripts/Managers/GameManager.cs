@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; } //점수
 
     public float groundSpeed { get; private set; }
+    public float baseGroundspeed { get; private set; }
 
     private void Awake()
     {
@@ -26,10 +27,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartGame()//현재 그라운드 무드에서 호출중; 추후 플레이어쪽 또는 게임매니저를 통해 로직변경해야함, 씬이 시작될시 호출하게.
     {
         IsPlaying = true;
         score = 0;
+        baseGroundspeed = 5f;
+        groundSpeed = baseGroundspeed;
     }
 
     public void AddScore(int amount)
@@ -41,9 +44,15 @@ public class GameManager : MonoBehaviour
     {
         IsPlaying = false;
     }
+
     public void SetGroundSpeed(float speed)
     {
         groundSpeed += speed;
+    }
+    public void SpeedUp(float speed)
+    {
+        baseGroundspeed += speed;
+        groundSpeed = baseGroundspeed;
     }
     public void BoostSpeed(float speed, float count)
     {
@@ -52,8 +61,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpeedBoost(float speed, float count)
     {
-        groundSpeed += speed;
+        groundSpeed = baseGroundspeed + speed;
         yield return new WaitForSeconds(count);
-        groundSpeed -= speed;
+        groundSpeed = baseGroundspeed;
     }
 }
