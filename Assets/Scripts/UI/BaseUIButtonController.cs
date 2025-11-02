@@ -18,7 +18,7 @@ public abstract class BaseUIButtonController : MonoBehaviour
     {
         if (button == null)
         {
-            Debug.LogWarning($"{name}: 등록하려는 버튼이 null입니다!");
+            //Debug.LogWarning($"{name}: 등록하려는 버튼이 null입니다!");
             return;
         }
 
