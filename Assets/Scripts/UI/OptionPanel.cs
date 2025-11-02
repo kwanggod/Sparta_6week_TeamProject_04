@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SettingPanel : BaseUIButtonController
+public class OptionPanel : BaseUIButtonController
 {
     [Header("소리 설정 슬라이더")]
     [SerializeField] private Slider bgmSlider;
@@ -11,7 +12,9 @@ public class SettingPanel : BaseUIButtonController
     [Header("버튼")]
     [SerializeField] private Button closeButton;
     [SerializeField] private Button panelCloseButton;
+    [SerializeField] private Button retryButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button quitGameButton;
 
     void Start()
     {
@@ -26,8 +29,9 @@ public class SettingPanel : BaseUIButtonController
 
         RegisterButton(closeButton, ClosePanel);
         RegisterButton(panelCloseButton, ClosePanel);
-        RegisterButton(exitButton, ExitGame);
-
+        RegisterButton(retryButton, Retry);
+        RegisterButton(exitButton, ExitStage);
+        RegisterButton(quitGameButton, QuitGame);
     }
 
     private void OnBGMVolumeChanged(float value)
@@ -50,11 +54,26 @@ public class SettingPanel : BaseUIButtonController
 
     private void ClosePanel()
     {
+        Time.timeScale = 1f;
         gameObject.SetActive(false);
         Debug.Log("설정 패널 닫힘");
     }
 
-    private void ExitGame()
+    private void Retry()
+    {
+        Time.timeScale = 1f;
+        gameObject.SetActive(false);
+        UIManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void ExitStage()
+    {
+        Time.timeScale = 1f;
+        gameObject.SetActive(false);
+        UIManager.Instance.LoadScene("MainScene");
+    }
+
+    private void QuitGame()
     {
         Debug.Log("게임 종료");
 #if UNITY_EDITOR //에디터 환경에서 종료된 거 처럼 보이게

@@ -355,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 848, y: 440.2}
+  m_AnchoredPosition: {x: 847, y: 430}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1552964508746658486
@@ -379,14 +379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.45490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1648709593, guid: 2a7bf34531bd75747ac941442eee38e5, type: 3}
+  m_Sprite: {fileID: -1013469705, guid: 2a7bf34531bd75747ac941442eee38e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -752,7 +752,6 @@ MonoBehaviour:
   pauseButton: {fileID: 7143284093690622553}
   jumpButton: {fileID: 5528826728057627778}
   slideButton: {fileID: 8489765534442241846}
-  pausePopup: {fileID: 6958928604628531476}
 --- !u!1 &7601733270141668091
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +15,6 @@ public class GameUIController : BaseUIButtonController
     [SerializeField] private Button jumpButton;
     [SerializeField] private Button slideButton;
 
-    [Header("팝업 UI")]
-    [SerializeField] private GameObject pausePopup;
-
     private PlayerMove playerMove;
 
     private void Start()
@@ -27,7 +24,7 @@ public class GameUIController : BaseUIButtonController
         RegisterButton(pauseButton, OnPauseButtonPressed);
 
 
-#if UNITY_ANDROID || UNITY_IOS // 모바일 플랫폼일 경우에만 점프 및 슬라이드 버튼 등록
+#if true //UNITY_ANDROID || UNITY_IOS // 모바일 플랫폼일 경우에만 점프 및 슬라이드 버튼 등록
         {
             jumpButton.gameObject.SetActive(true);
             slideButton.gameObject.SetActive(true);
@@ -57,19 +54,7 @@ public class GameUIController : BaseUIButtonController
     private void OnPauseButtonPressed()
     {
         Time.timeScale = 0f;
-        pausePopup.SetActive(true);
+        UIManager.Instance.ShowOptionPanel2();
         Debug.Log("게임 일시정지");
-    }
-
-    public void OnResumeButtonPressed()
-    {
-        //게임 재개 처리 입력해주시면 됩니다.
-        Debug.Log("게임 재개");
-    }
-
-    public void OnExitButtonPressed()
-    {
-        //스테이지 고르는 씬으로 이동하는 처리 입력해주시면 됩니다.
-        Debug.Log("메인화면으로 이동");
     }
 }

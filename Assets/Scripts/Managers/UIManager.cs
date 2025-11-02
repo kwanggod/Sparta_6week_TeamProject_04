@@ -5,7 +5,10 @@ public class UIManager : MonoBehaviour
 {
     // 싱글톤 인스턴스
     public static UIManager Instance { get; private set; }
-    [SerializeField] private GameObject optionPanel;
+    [SerializeField] private GameObject optionPanel1;
+    [SerializeField] private GameObject optionPanel2;
+    [SerializeField] private GameObject uiPrefab;
+    private Scene scene;
 
     private void Awake()
     {
@@ -18,7 +21,7 @@ public class UIManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(optionPanel);
+        SceneManager.sceneLoaded += OnSceneLoaded; //씬 로드 이벤트 등록
     }
 
     // 씬 전환 유틸
@@ -29,20 +32,50 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void ShowOptionPanel()
+    public void ShowOptionPanel1()
     {
-        if (optionPanel == null)
-        {
-            Debug.LogWarning("옵션 패널이 Null입니다!");
-            return;
-        }
-        optionPanel.SetActive(true);
+        if (optionPanel1 == null) return;
+        optionPanel1.SetActive(true);
     }
 
-    public void HideOptionPanel()
+    public void ShowOptionPanel2()
     {
-        if (optionPanel == null) return;
-        optionPanel.SetActive(false);
+        if (optionPanel2 == null) return;
+        optionPanel2.SetActive(true);
+    }
+
+    public void HideOptionPanel1()
+    {
+        if (optionPanel1 == null) return;
+        optionPanel1.SetActive(false);
+    }
+
+    public void HideOptionPanel2()
+    {
+        if (optionPanel2 == null) return;
+        optionPanel2.SetActive(false);
+    }
+
+    // 씬 로드 시 UI 프리팹 관리
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var existingUI = FindObjectOfType<GameUIController>();
+
+        if (scene.name.StartsWith("Stage"))
+        {
+            if (existingUI == null)
+            {
+                Instantiate(uiPrefab);
+            }
+        }
+        else
+        {
+            if (existingUI != null)
+            {
+                Destroy(existingUI.gameObject);
+                Debug.Log("게임 UI 컨트롤러 제거됨");
+            }
+        }
     }
 }
 
