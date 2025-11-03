@@ -89,7 +89,7 @@ public class PlayerMove : MonoBehaviour
             TakeDamage(tickDamage);
         }
 
-        if(currentHp <= 0)
+        if (currentHp <= 0)
         {
             Die();
         }
@@ -120,7 +120,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))  // 태그 Ground 로
         {
-          
             Vector3 vector3 = _rigidbody2D.velocity;   // 겹치기 무한점프 방지
             if (vector3 == Vector3.zero)
             {
@@ -146,17 +145,17 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        if(invCoroutine != null)
+        if (invCoroutine != null)
         {
             StopCoroutine(invCoroutine);
 
         }
 
-        if(damage > tickDamage) // 틱뎀에 의한 무적발생 방지
+        if (damage > tickDamage) // 틱뎀에 의한 무적발생 방지
         {
             invCoroutine = StartCoroutine(OnHitRoutine());
         }
-        
+
     }
     public void Heal(int heal)
     {
@@ -171,11 +170,12 @@ public class PlayerMove : MonoBehaviour
         isDie = true;
         currentHp = 0;
         _rigidbody2D.velocity = Vector2.zero;
+        GameManager.instance.EndGame();
         Debug.Log("Player Die");
         animator.SetTrigger("isDie");
-        GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
     }
+
     public void TryJump() //모바일 버튼 용 메써드
     {
         if (maxJumpCount > jumpCount && isGrounded)

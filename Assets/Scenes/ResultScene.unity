@@ -510,8 +510,8 @@ MonoBehaviour:
   retryButton: {fileID: 294667382}
   exitButton: {fileID: 1809188043}
   optionButton: {fileID: 61792487}
-  CurrnetscoreText: {fileID: 989673797}
-  HighscoreText: {fileID: 1968306555}
+  CurrnetscoreText: {fileID: 1137620564}
+  HighscoreText: {fileID: 716457191}
 --- !u!1 &230556030
 GameObject:
   m_ObjectHideFlags: 0
