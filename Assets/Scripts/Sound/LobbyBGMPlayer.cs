@@ -11,15 +11,15 @@ public class LobbyBGMPlayer : MonoBehaviour
     [Range(0.1f, 3f)][SerializeField] private float pitch = 1f;
     void Start()
     {
-        BGMManager.instance.PlayBGM(lobbyBGM);
+        BGMPlayer.instance.PlayBGM(lobbyBGM);
     }
 
     void Update()
     {
-        if (BGMManager.instance != null)
+        if (BGMPlayer.instance != null)
         {
-            BGMManager.instance.SetVolume(volume);
-            BGMManager.instance.SetPitch(pitch);
+            BGMPlayer.instance.SetVolume(volume);
+            BGMPlayer.instance.SetPitch(pitch);
         }
     }
 }

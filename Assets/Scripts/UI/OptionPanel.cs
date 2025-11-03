@@ -18,8 +18,8 @@ public class OptionPanel : BaseUIButtonController
 
     void Start()
     {
-        if (BGMManager.instance != null)
-            bgmSlider.value = BGMManager.instance.GetVolume();
+        if (BGMPlayer.instance != null)
+            bgmSlider.value = BGMPlayer.instance.GetVolume();
 
         if (SFXManager.instance != null)
             sfxSlider.value = SFXManager.instance.GetVolume();
@@ -36,9 +36,9 @@ public class OptionPanel : BaseUIButtonController
 
     private void OnBGMVolumeChanged(float value)
     {
-        if (BGMManager.instance != null)
+        if (BGMPlayer.instance != null)
         {
-            BGMManager.instance.SetVolume(value);
+            BGMPlayer.instance.SetVolume(value);
             Debug.Log($"BGM 볼륨 변경: {value}");
         }
     }

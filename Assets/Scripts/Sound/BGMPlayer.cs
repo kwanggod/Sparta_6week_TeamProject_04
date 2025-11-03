@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BGMManager : MonoBehaviour
+public class BGMPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static BGMManager instance { get; private set; } //현재 클래스를 싱글톤
+    public static BGMPlayer instance { get; private set; } //현재 클래스를 싱글톤
     private AudioSource bgmSource;
 
     private void Awake()
