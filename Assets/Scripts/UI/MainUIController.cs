@@ -30,7 +30,6 @@ public class MainUIController : BaseUIButtonController
 
     private void OnStageButtonPressed(string sceneName)
     {
-        GameManager.instance.StartGame();
         SceneManager.LoadScene(sceneName);
 
     }

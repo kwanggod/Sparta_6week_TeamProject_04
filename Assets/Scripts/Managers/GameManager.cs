@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
             BestScores.Add(currentSceneName, score);
         }
         OnPlayerDeath();
+        
         Debug.Log($"Best Score for {currentSceneName}: {BestScores[currentSceneName]}");
     }
 
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = originalTimeScale;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        SceneManager.LoadScene("ResultScene");
     }
 }
 
