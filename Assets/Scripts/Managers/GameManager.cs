@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        if (!IsPlaying) return;
+        if (!IsPlaying) return; //죽은 시점에서 점수가 더 이상 안 올라가게
         score += amount;
     }
 

@@ -23,7 +23,12 @@ public class ResultUIController : BaseUIButtonController
     }
     private void OnRetryPressed()
     {
-        //UIManager.Instance?.LoadScene("MainScene");
+        string lastScene = GameManager.instance.GetLastPlayedScene();
+
+        if (!string.IsNullOrEmpty(lastScene))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(lastScene);
+        }
     }
 
     private void OnExitPressed()
