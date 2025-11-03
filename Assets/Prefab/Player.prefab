@@ -161,7 +161,6 @@ MonoBehaviour:
   jumpCount: 0
   maxJumpCount: 2
   jumpForce: 10
-  slideDuration: 1
   maxHp: 100
   currentHp: 0
   tickRate: 1
@@ -169,6 +168,11 @@ MonoBehaviour:
   sliderColliderSize: {x: 1, y: 0.8}
   sliderColliderOffset: {x: 0, y: -0.4}
   dieOffsetY: -15
+  isHit: 0
+  isInvincible: 0
+  invincibleDuration: 1
+  invincibleTime: 0
+  hitAnimeDuration: 0.8
 --- !u!1 &1947883899441358148
 GameObject:
   m_ObjectHideFlags: 0
