@@ -25,7 +25,7 @@ public class MainUIController : BaseUIButtonController
         RegisterButton(stage3Button, () => OnStageButtonPressed("Stage3Scene"));
         RegisterButton(optionButton, OnOptionPressed);
 
-
+        UpdateBestScoreUI();
     }
 
     private void OnStageButtonPressed(string sceneName) => SceneManager.LoadScene(sceneName);
@@ -39,10 +39,13 @@ public class MainUIController : BaseUIButtonController
         int stage1Score = bestScore.ContainsKey("Stage1Scene") ? bestScore["Stage1Scene"] : 0;
         Stage1bestScoreText.text = $"최고점수 {stage1Score}";
 
+
         int stage2Score = bestScore.ContainsKey("Stage2Scene") ? bestScore["Stage2Scene"] : 0;
         Stage2bestScoreText.text = $"최고점수 {stage2Score}";
 
+
         int stage3Score = bestScore.ContainsKey("Stage3Scene") ? bestScore["Stage3Scene"] : 0;
         Stage3bestScoreText.text = $"최고점수 {stage3Score}";
+
     }
 }

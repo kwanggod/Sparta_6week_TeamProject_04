@@ -171,12 +171,23 @@ public class PlayerMove : MonoBehaviour
         isDie = true;
         currentHp = 0;
         _rigidbody2D.velocity = Vector2.zero;
-        GameManager.instance.EndGame();
+
         Debug.Log("Player Die");
         animator.SetTrigger("isDie");
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce * 1.5f);
         GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
+
+        GameManager.instance.EndGame();
+    }
+
+    private IEnumerator GotoResultScene()
+    {
+        GameManager.instance.EndGame();
+
+        // 🔹 2. 0.5초 정도 기다린 후 결과 씬으로 이동
+        yield return new WaitForSeconds(0.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ResultScene");
     }
 
     public void TryJump() //모바일 버튼 용 메써드

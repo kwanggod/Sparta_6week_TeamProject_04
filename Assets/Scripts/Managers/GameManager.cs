@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
+        if (!IsPlaying) return;
         score += amount;
     }
 
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         IsPlaying = false;
 
         string currentSceneName = SceneManager.GetActiveScene().name;
+        lastPlayedScene = currentSceneName;
+
         if (BestScores.ContainsKey(currentSceneName))
         {
             if (score > BestScores[currentSceneName])
@@ -106,4 +109,5 @@ public class GameManager : MonoBehaviour
     {
         groundStop = false;
     }
+
 }
