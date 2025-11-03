@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 10f;
     private Rigidbody2D _rigidbody2D;
     public int maxHp = 100;
-    public int currentHp;
+    public float currentHp;
     public float tickRate = 1f;
     public int tickDamage = 1;
     private float tickTimer = 0f;
@@ -86,19 +86,15 @@ public class PlayerMove : MonoBehaviour
         animator.SetBool("isSlide", isSlide);
         animator.SetBool("isDie", isDie);
 
-        tickTimer += Time.deltaTime;
-        if (tickTimer >= tickRate)
-        {
-            tickTimer = 0f;
-            TakeDamage(tickDamage);
-        }
 
+        currentHp -= Time.deltaTime;
         if (currentHp <= 0)
         {
+            currentHp = 0;
             Die();
+            return;
+
         }
-
-
 
     }
 
