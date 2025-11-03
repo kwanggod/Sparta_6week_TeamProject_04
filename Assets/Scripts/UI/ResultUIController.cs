@@ -27,6 +27,7 @@ public class ResultUIController : BaseUIButtonController
 
         if (!string.IsNullOrEmpty(lastScene))
         {
+            GameManager.instance.ResetScore();
             UnityEngine.SceneManagement.SceneManager.LoadScene(lastScene);
         }
     }
