@@ -32,25 +32,25 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void ShowOptionPanel1()
+    public void ShowLobbyOption()
     {
         if (optionPanel1 == null) return;
         optionPanel1.SetActive(true);
     }
 
-    public void ShowOptionPanel2()
+    public void ShowInGameOption()
     {
         if (optionPanel2 == null) return;
         optionPanel2.SetActive(true);
     }
 
-    public void HideOptionPanel1()
+    public void HideLobbyOption()
     {
         if (optionPanel1 == null) return;
         optionPanel1.SetActive(false);
     }
 
-    public void HideOptionPanel2()
+    public void HideInGameOption()
     {
         if (optionPanel2 == null) return;
         optionPanel2.SetActive(false);
