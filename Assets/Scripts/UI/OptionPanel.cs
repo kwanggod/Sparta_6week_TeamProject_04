@@ -16,7 +16,7 @@ public class OptionPanel : BaseUIButtonController
     [SerializeField] private Button exitButton;
     [SerializeField] private Button quitGameButton;
 
-    void Start()
+    void OnEnable()
     {
         if (BGMPlayer.instance != null)
             bgmSlider.value = BGMPlayer.instance.GetVolume();

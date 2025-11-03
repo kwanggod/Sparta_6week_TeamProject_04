@@ -32,7 +32,6 @@ public class BGMPlayer : MonoBehaviour
 
         bgmSource.clip = clip;
         bgmSource.Play();
-
     }
 
     public void StopBGM()
