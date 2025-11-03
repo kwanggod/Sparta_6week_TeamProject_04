@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public Animator animator;
     public bool isGrounded;
     public bool isSlide;
+    public bool isDie;
     public int jumpCount = 0;
     public int maxJumpCount = 2;
     public float jumpForce = 10f;
@@ -79,6 +80,7 @@ public class PlayerMove : MonoBehaviour
         animator.SetBool("isGrounded", isGrounded);
         animator.SetBool("isJump", !isGrounded);
         animator.SetBool("isSlide", isSlide);
+        animator.SetBool("isDie", isDie);
 
         tickTimer += Time.deltaTime;
         if (tickTimer >= tickRate)
@@ -87,6 +89,10 @@ public class PlayerMove : MonoBehaviour
             TakeDamage(tickDamage);
         }
 
+        if(currentHp <= 0)
+        {
+            Die();
+        }
 
 
 
@@ -135,6 +141,8 @@ public class PlayerMove : MonoBehaviour
         if (currentHp <= 0)
         {
             currentHp = 0;
+            Die();
+            return;
 
         }
 
@@ -159,9 +167,12 @@ public class PlayerMove : MonoBehaviour
 
     public void Die()
     {
+        if (isDie) return;
+        isDie = true;
         currentHp = 0;
         _rigidbody2D.velocity = Vector2.zero;
         Debug.Log("Player Die");
+        animator.SetTrigger("isDie");
         //애니메이션 추가 예정? 혹은 바로 결과창?
     }
     public void TryJump() //모바일 버튼 용 메써드
