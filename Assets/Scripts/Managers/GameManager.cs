@@ -96,4 +96,8 @@ public class GameManager : MonoBehaviour
     {
         groundStop = true;
     }
+    public void Groundgo()
+    {
+        groundStop = false;
+    }
 }
