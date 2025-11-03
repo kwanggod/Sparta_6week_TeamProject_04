@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<string, int> BestScores = new Dictionary<string, int>(); //씬이름과 최고점수를 저장하는 딕셔너리
 
+    public bool groundStop { get; private set; }
+
     private void Awake()
     {
+        groundStop=false;
         if (instance == null)
 
         {
@@ -87,5 +90,10 @@ public class GameManager : MonoBehaviour
         groundSpeed = baseGroundspeed + speed;
         yield return new WaitForSeconds(count);
         groundSpeed = baseGroundspeed;
+    }
+
+    public void GroundStop()
+    {
+        groundStop = true;
     }
 }

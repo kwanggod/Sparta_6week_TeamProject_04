@@ -173,6 +173,7 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
         Debug.Log("Player Die");
         animator.SetTrigger("isDie");
+        GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
     }
     public void TryJump() //모바일 버튼 용 메써드
