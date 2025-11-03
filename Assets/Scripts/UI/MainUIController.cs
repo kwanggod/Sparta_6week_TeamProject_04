@@ -21,5 +21,5 @@ public class MainUIController : BaseUIButtonController
 
     private void OnStageButtonPressed(string sceneName) => SceneManager.LoadScene(sceneName);
 
-    private void OnOptionPressed() => UIManager.Instance.ShowOptionPanel1();
+    private void OnOptionPressed() => UIManager.Instance.ShowLobbyOption();
 }

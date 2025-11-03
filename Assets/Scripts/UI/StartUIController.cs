@@ -18,5 +18,5 @@ public class StartUIController : BaseUIButtonController
         UIManager.Instance?.LoadScene("MainScene");
     }
 
-    private void OnOptionPressed() => UIManager.Instance.ShowOptionPanel1();
+    private void OnOptionPressed() => UIManager.Instance.ShowLobbyOption();
 }
