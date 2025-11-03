@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3308584743523491900}
   - component: {fileID: 7415855459200443814}
   - component: {fileID: 3198813716091960424}
+  - component: {fileID: 8407679222843461408}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -158,6 +159,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   isGrounded: 0
   isSlide: 0
+  isDie: 0
   jumpCount: 0
   maxJumpCount: 2
   jumpForce: 10
@@ -173,6 +175,22 @@ MonoBehaviour:
   invincibleDuration: 1
   invincibleTime: 0
   hitAnimeDuration: 0.8
+--- !u!114 &8407679222843461408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13759055389024055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737befad1e7dc474692a253ea97e9cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpClip: {fileID: 8300000, guid: cd2a6e9a9b2868c4b848d4dc978b008c, type: 3}
+  slideClip: {fileID: 8300000, guid: 77917af6cd9e8cc4aa538e1b07d64553, type: 3}
+  hitClip: {fileID: 8300000, guid: 0ee6189beee359d40888f28ea5ab6fc6, type: 3}
+  dieClip: {fileID: 8300000, guid: ba1c0931997f3544b8758a547750309f, type: 3}
 --- !u!1 &1947883899441358148
 GameObject:
   m_ObjectHideFlags: 0

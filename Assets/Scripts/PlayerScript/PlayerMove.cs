@@ -38,6 +38,9 @@ public class PlayerMove : MonoBehaviour
     //public Vector2 groundCheckOffset = new Vector2(0f, -0.6f); // 레이저 쏘는 위치 n만큼 내림
 
     // Start is called before the first frame update
+
+    private PlayerSFXController sfxController;
+
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -47,6 +50,8 @@ public class PlayerMove : MonoBehaviour
         originalColliderOffset = playerCollider.offset;
         currentHp = maxHp;
         isDie = false;
+
+        sfxController = GetComponent<PlayerSFXController>();
     }
 
     // Update is called once per frame
@@ -104,6 +109,8 @@ public class PlayerMove : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         jumpCount++;
         isGrounded = false;
+
+        sfxController?.PlayJumpSFX();
     }
 
     void Slide()
@@ -114,6 +121,8 @@ public class PlayerMove : MonoBehaviour
             animator.SetTrigger("isSlide");
             playerCollider.size = sliderColliderSize;
             playerCollider.offset = sliderColliderOffset;
+
+            sfxController?.PlaySlideSFX();
         }
 
     }
@@ -137,6 +146,7 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+
         currentHp -= damage;
         if (currentHp <= 0)
         {
@@ -145,6 +155,7 @@ public class PlayerMove : MonoBehaviour
             return;
 
         }
+
 
         if (invCoroutine != null)
         {
@@ -178,17 +189,20 @@ public class PlayerMove : MonoBehaviour
         GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
 
+        sfxController?.PlayDieSFX();
+
+        GameManager.instance.GroundStop();
         GameManager.instance.EndGame();
     }
 
-    private IEnumerator GotoResultScene()
+    /*private IEnumerator GotoResultScene()
     {
         GameManager.instance.EndGame();
 
         // 🔹 2. 0.5초 정도 기다린 후 결과 씬으로 이동
         yield return new WaitForSeconds(0.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("ResultScene");
-    }
+    }*/
 
     public void TryJump() //모바일 버튼 용 메써드
     {
@@ -210,6 +224,7 @@ public class PlayerMove : MonoBehaviour
     {
         isHit = true;
         isInvincible = true;
+        sfxController?.PlayHitSFX();
         animator.SetBool("isHit", true);
         yield return new WaitForSeconds(hitAnimeDuration);
         animator.SetBool("isHit", false);
