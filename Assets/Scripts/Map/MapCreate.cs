@@ -5,7 +5,6 @@ public class MapManager : MonoBehaviour
 {
     public GameObject[] mapPrefabs;
     private List<GameObject> mapPool = new List<GameObject>();
-
     private float spawnX = 60f;
     private GameObject currentMap;
 
