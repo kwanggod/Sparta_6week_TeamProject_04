@@ -65,6 +65,12 @@ public class Item : MonoBehaviour
                             case "gem_red":
                                 GameManager.instance.AddScore(5000);
                                 break;
+                            case "gem_green":
+                                GameManager.instance.AddScore(10000);
+                                break;
+                            case "gem_yellow":
+                                GameManager.instance.AddScore(15000);
+                                break;
                             case "conveyor":
                                 GameManager.instance.BoostSpeed(4f, 2f);
                                 break;

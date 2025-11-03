@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<string, int> BestScores = new Dictionary<string, int>(); //씬이름과 최고점수를 저장하는 딕셔너리
     private string lastPlayedScene = "";
-
+    private Coroutine speedBoostCoroutine;
     public bool groundStop { get; private set; }
 
     private void Awake()
@@ -86,7 +86,12 @@ public class GameManager : MonoBehaviour
     }
     public void BoostSpeed(float speed, float count)
     {
-        StartCoroutine(SpeedBoost(speed, count));
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine);
+        }
+
+        speedBoostCoroutine = StartCoroutine(SpeedBoost(speed, count));
     }
 
     public Dictionary<string, int> GetBestScores()
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour
         groundSpeed = baseGroundspeed + speed;
         yield return new WaitForSeconds(count);
         groundSpeed = baseGroundspeed;
+        speedBoostCoroutine = null;
     }
 
     public void GroundStop()
