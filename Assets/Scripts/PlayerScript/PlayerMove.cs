@@ -184,12 +184,8 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("Player Die");
         animator.SetTrigger("isDie");
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce * 1.5f);
-        GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
-
         sfxController?.PlayDieSFX();
-
-        GameManager.instance.GroundStop();
         GameManager.instance.EndGame();
     }
 

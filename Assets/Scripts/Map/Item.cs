@@ -40,7 +40,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!GameManager.instance.groundStop)
+            if (GameManager.instance.IsPlaying)
             {
                 Bounds bounds = other.bounds;
 
