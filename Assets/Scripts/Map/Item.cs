@@ -40,41 +40,42 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Bounds bounds = other.bounds;
-
-            Vector3 min = bounds.min;
-            Vector3 max = bounds.max;
-
-            for (float x = min.x; x <= max.x; x += 0.3f)
+            if (!GameManager.instance.groundStop)
             {
-                for (float y = min.y; y <= max.y; y += 0.3f)
+                Bounds bounds = other.bounds;
+
+                Vector3 min = bounds.min;
+                Vector3 max = bounds.max;
+
+                for (float x = min.x; x <= max.x; x += 0.3f)
                 {
-                    Vector3Int cellPos = itemTilemap.WorldToCell(new Vector3(x, y, 0));
-                    TileBase tile = itemTilemap.GetTile(cellPos);
-                    if (tile == null) continue;
-
-                    string tileName = tile.name;
-
-                    switch (tileName)
+                    for (float y = min.y; y <= max.y; y += 0.3f)
                     {
-                        case "gem_blue":
-                            GameManager.instance.AddScore(1000);
-                            break;
-                        case "gem_red":
-                            GameManager.instance.AddScore(5000);
-                            break;
-                        case "conveyor":
-                            GameManager.instance.BoostSpeed(4f, 2f);
-                            break;
-                        case "hud_heart":
-                            other.GetComponent<PlayerMove>().Heal(10);
-                            break;
+                        Vector3Int cellPos = itemTilemap.WorldToCell(new Vector3(x, y, 0));
+                        TileBase tile = itemTilemap.GetTile(cellPos);
+                        if (tile == null) continue;
+
+                        string tileName = tile.name;
+
+                        switch (tileName)
+                        {
+                            case "gem_blue":
+                                GameManager.instance.AddScore(1000);
+                                break;
+                            case "gem_red":
+                                GameManager.instance.AddScore(5000);
+                                break;
+                            case "conveyor":
+                                GameManager.instance.BoostSpeed(4f, 2f);
+                                break;
+                            case "hud_heart":
+                                other.GetComponent<PlayerMove>().Heal(10);
+                                break;
+                        }
+                        sfx?.PlayItemSound();
+                        itemTilemap.SetTile(cellPos, null);
                     }
-                    sfx?.PlayItemSound();
-                    itemTilemap.SetTile(cellPos, null);
-
                 }
-
             }
         }
     }
