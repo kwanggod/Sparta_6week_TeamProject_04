@@ -54,7 +54,7 @@ public class GameUIController : BaseUIButtonController
     private void OnPauseButtonPressed()
     {
         Time.timeScale = 0f;
-        UIManager.Instance.ShowOptionPanel2();
+        UIManager.Instance.ShowInGameOption();
         Debug.Log("게임 일시정지");
     }
 }
