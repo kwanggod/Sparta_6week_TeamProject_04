@@ -110,4 +110,8 @@ public class GameManager : MonoBehaviour
         groundStop = false;
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+    }
 }
