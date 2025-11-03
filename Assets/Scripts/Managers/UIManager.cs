@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionPanel1;
     [SerializeField] private GameObject optionPanel2;
     [SerializeField] private GameObject uiPrefab;
-    private Scene scene;
 
     private void Awake()
     {
@@ -28,7 +27,6 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName)) return;
-        Debug.Log($"{sceneName} 버튼 클릭됨");
         SceneManager.LoadScene(sceneName);
     }
 

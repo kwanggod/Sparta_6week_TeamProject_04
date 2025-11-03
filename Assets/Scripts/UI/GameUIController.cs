@@ -13,7 +13,7 @@ public class GameUIController : BaseUIButtonController
 
     [Header("모바일 전용 UI")]
     [SerializeField] private Button jumpButton;
-    [SerializeField] private Button slideButton;
+    [SerializeField] private IPointerHandler slideButton;
 
     private PlayerMove playerMove;
 
@@ -29,7 +29,8 @@ public class GameUIController : BaseUIButtonController
             jumpButton.gameObject.SetActive(true);
             slideButton.gameObject.SetActive(true);
             RegisterButton(jumpButton, playerMove.TryJump);
-            RegisterButton(slideButton, playerMove.TrySlide);
+            slideButton.onPointerDown.AddListener(playerMove.TrySlideDown);
+            slideButton.onPointerUp.AddListener(playerMove.TrySlideUp);
         }
 
 #else

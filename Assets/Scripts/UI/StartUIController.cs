@@ -13,10 +13,7 @@ public class StartUIController : BaseUIButtonController
         RegisterButton(optionButton, OnOptionPressed);
     }
 
-    private void OnStartPressed()
-    {
-        UIManager.Instance?.LoadScene("MainScene");
-    }
+    private void OnStartPressed() => UIManager.Instance.LoadScene("MainScene");
 
     private void OnOptionPressed() => UIManager.Instance.ShowLobbyOption();
 }

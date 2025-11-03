@@ -16,12 +16,10 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<string, int> BestScores = new Dictionary<string, int>(); //씬이름과 최고점수를 저장하는 딕셔너리
     private string lastPlayedScene = "";
-
-    public bool groundStop { get; private set; }
+    private Coroutine speedBoostCoroutine;
 
     private void Awake()
     {
-        groundStop = false;
         if (instance == null)
 
         {
@@ -65,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             BestScores.Add(currentSceneName, score);
         }
-
+        OnPlayerDeath();
         Debug.Log($"Best Score for {currentSceneName}: {BestScores[currentSceneName]}");
     }
 
@@ -85,7 +83,12 @@ public class GameManager : MonoBehaviour
     }
     public void BoostSpeed(float speed, float count)
     {
-        StartCoroutine(SpeedBoost(speed, count));
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine);
+        }
+
+        speedBoostCoroutine = StartCoroutine(SpeedBoost(speed, count));
     }
 
     public Dictionary<string, int> GetBestScores()
@@ -98,19 +101,32 @@ public class GameManager : MonoBehaviour
         groundSpeed = baseGroundspeed + speed;
         yield return new WaitForSeconds(count);
         groundSpeed = baseGroundspeed;
+        speedBoostCoroutine = null;
     }
 
-    public void GroundStop()
-    {
-        groundStop = true;
-    }
-    public void Groundgo()
-    {
-        groundStop = false;
-    }
 
     public void ResetScore()
     {
         score = 0;
     }
+    public void OnPlayerDeath()
+    {
+        StartCoroutine(DeathSlowMotion());
+    }
+
+    private IEnumerator DeathSlowMotion()
+    {
+        float originalTimeScale = Time.timeScale;
+        float slowTimeScale = 0.2f;
+        float duration = 1f;
+
+        Time.timeScale = slowTimeScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        Time.timeScale = originalTimeScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
 }
+

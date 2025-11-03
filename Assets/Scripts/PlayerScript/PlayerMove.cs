@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -59,21 +59,19 @@ public class PlayerMove : MonoBehaviour
     {
         //GroundCheck();
 
-        if (maxJumpCount > jumpCount && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X)) && !isDie) // 버튼 이름에 맞게 변경
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.X))) // 버튼 이름에 맞게 변경
         {
-            Jump();
+            TryJump();
         }
 
-        if (!isSlide && Input.GetKey(KeyCode.C) && !isDie) // || Input.GetButtonDown("Slide") 추후 슬라이드 버튼 추가하면 같이 추가
+        if (Input.GetKey(KeyCode.C)) // || Input.GetButtonDown("Slide") 추후 슬라이드 버튼 추가하면 같이 추가
         {
-            Slide();
+            TrySlideDown();
         }
 
-        if (isSlide && Input.GetKeyUp(KeyCode.C) && !isDie)
+        if (Input.GetKeyUp(KeyCode.C))
         {
-            isSlide = false;
-            playerCollider.size = originalColliderSize;
-            playerCollider.offset = originalColliderOffset;
+            TrySlideUp();
         }
 
         if (transform.position.y < dieOffsetY)
@@ -186,12 +184,8 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("Player Die");
         animator.SetTrigger("isDie");
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce * 1.5f);
-        GameManager.instance.GroundStop();
         //애니메이션 추가 예정? 혹은 바로 결과창?
-
         sfxController?.PlayDieSFX();
-
-        GameManager.instance.GroundStop();
         GameManager.instance.EndGame();
     }
 
@@ -206,20 +200,30 @@ public class PlayerMove : MonoBehaviour
 
     public void TryJump() //모바일 버튼 용 메써드
     {
-        if (maxJumpCount > jumpCount && isGrounded && !isDie)
+        if (maxJumpCount > jumpCount && !isDie)
         {
             Jump();
         }
     }
 
-    public void TrySlide()
+    public void TrySlideDown()
     {
-        if (!isSlide && isGrounded && !isDie)
+        if (!isSlide && !isDie)
         {
             Slide();
         }
-
     }
+
+    public void TrySlideUp()
+    {
+        if (isSlide && !isDie)
+        {
+            isSlide = false;
+            playerCollider.size = originalColliderSize;
+            playerCollider.offset = originalColliderOffset;
+        }
+    }
+
     IEnumerator OnHitRoutine()
     {
         isHit = true;

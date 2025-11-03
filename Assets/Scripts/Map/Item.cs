@@ -40,7 +40,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!GameManager.instance.groundStop)
+            if (GameManager.instance.IsPlaying)
             {
                 Bounds bounds = other.bounds;
 
@@ -64,6 +64,12 @@ public class Item : MonoBehaviour
                                 break;
                             case "gem_red":
                                 GameManager.instance.AddScore(5000);
+                                break;
+                            case "gem_green":
+                                GameManager.instance.AddScore(10000);
+                                break;
+                            case "gem_yellow":
+                                GameManager.instance.AddScore(15000);
                                 break;
                             case "conveyor":
                                 GameManager.instance.BoostSpeed(4f, 2f);
