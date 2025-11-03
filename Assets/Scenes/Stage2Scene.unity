@@ -2624,7 +2624,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a93cf62109a77449a0a7d8b32190cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabs: []
+  mapPrefabs:
+  - {fileID: 6123495359657784070, guid: 607ff8577ed3f254b8b92b264420b2e8, type: 3}
+  - {fileID: 8647128606526327881, guid: fb9f1a530c3c99b4a8d8d722c95c664f, type: 3}
+  - {fileID: 3876326728033813159, guid: c04c3455e606cc9489ca41135e421f9c, type: 3}
+  - {fileID: 2790607397363676666, guid: 2a9a7e0c2582e224fa2308cc6a15f7df, type: 3}
+  - {fileID: 7314999421286604436, guid: 89521b46579becf46bfa2a91811884a0, type: 3}
+  - {fileID: 8786369951695225537, guid: 5dc9f19a6ea97154ea9dff713251d7a1, type: 3}
+  - {fileID: 8409152284225745244, guid: 69792b3728b383a47ae6a7b609c40e2d, type: 3}
 --- !u!4 &2139149579
 Transform:
   m_ObjectHideFlags: 0
