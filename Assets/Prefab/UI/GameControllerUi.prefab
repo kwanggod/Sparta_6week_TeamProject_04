@@ -751,7 +751,7 @@ MonoBehaviour:
   scoreText: {fileID: 2138961744160827739}
   pauseButton: {fileID: 7143284093690622553}
   jumpButton: {fileID: 5528826728057627778}
-  slideButton: {fileID: 8489765534442241846}
+  slideButton: {fileID: 149711637355259427}
 --- !u!1 &7601733270141668091
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +765,7 @@ GameObject:
   - component: {fileID: 7863581182587473535}
   - component: {fileID: 8489765534442241846}
   - component: {fileID: 4568764857628234635}
+  - component: {fileID: 149711637355259427}
   m_Layer: 5
   m_Name: SlideBtn
   m_TagString: Untagged
@@ -886,6 +887,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transparency: 0.5
+--- !u!114 &149711637355259427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601733270141668091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81c7bae988f6f44c8764c670db8886c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onPointerUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7696391011398237255
 GameObject:
   m_ObjectHideFlags: 0
