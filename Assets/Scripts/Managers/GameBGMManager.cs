@@ -7,7 +7,7 @@ public class GameBGMManager : MonoBehaviour
     [SerializeField] private AudioClip gameBGM;
     void Start()
     {
-        BGMManager.instance.PlayBGM(gameBGM);
+        BGMPlayer.instance.PlayBGM(gameBGM);
     }
 
 }
