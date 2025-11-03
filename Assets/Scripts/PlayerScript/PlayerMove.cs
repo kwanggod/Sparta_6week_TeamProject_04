@@ -12,8 +12,6 @@ public class PlayerMove : MonoBehaviour
     public int jumpCount = 0;
     public int maxJumpCount = 2;
     public float jumpForce = 10f;
-    public float slideDuration = 1f;
-    private float slideTimer = 0f;
     private Rigidbody2D _rigidbody2D;
     public int maxHp = 100;
     public int currentHp;
@@ -26,6 +24,12 @@ public class PlayerMove : MonoBehaviour
     public Vector2 sliderColliderSize = new Vector2(1f, 0.8f);
     public Vector2 sliderColliderOffset = new Vector2(0f, -0.4f);
     public float dieOffsetY = -15f;
+    public bool isHit = false;
+    public bool isInvincible = false; // 무적
+    public float invincibleDuration = 1f; // 무적 지속시간
+    public float invincibleTime = 0f;
+    public float hitAnimeDuration = 0.8f; // hit애니메이션 지속시간
+
 
     //public LayerMask groundLayer; // 레이어 설정
     //public float groundCheckDistance = 0.1f; // raycast 길이 
@@ -96,10 +100,9 @@ public class PlayerMove : MonoBehaviour
 
     void Slide()
     {
-        if (!isSlide)
+        if (!isSlide && isGrounded)
         {
             isSlide = true;
-            slideTimer = 0f;
             animator.SetTrigger("isSlide");
             playerCollider.size = sliderColliderSize;
             playerCollider.offset = sliderColliderOffset;
@@ -111,7 +114,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))  // 태그 Ground 로
         {
           
-            Vector3 vector3 = _rigidbody2D.velocity;
+            Vector3 vector3 = _rigidbody2D.velocity;   // 겹치기 무한점프 방지
             if (vector3 == Vector3.zero)
             {
                 isGrounded = true;
@@ -121,6 +124,8 @@ public class PlayerMove : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        if (isInvincible || isHit) return;
+
         currentHp -= damage;
         if (currentHp <= 0)
         {
@@ -158,30 +163,16 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-
-   /* void GroundCheck() // raycast 발사하여 그라운드 체크  2층 무한점프 방지용 코드
+    IEnumerator OnHitRoutine()
     {
+        isHit = true;
+        isInvincible = true;
+        animator.SetBool("isHit", true);
+        yield return new WaitForSeconds(hitAnimeDuration);
+        animator.SetBool("isHit", false);
+        isHit = false;
+        yield return new WaitForSeconds(invincibleDuration - hitAnimeDuration); // anim 시간 이후 남은 무적시간 지속
+        isInvincible = false;
+    }
 
-        float halfHeight = playerCollider.bounds.extents.y;
-        float halfwidth = playerCollider.bounds.extents.x * 0.9f;
-        Bounds bounds = playerCollider.bounds;
-        Vector2 center = new Vector2(bounds.center.x, bounds.min.y) + groundCheckOffset;
-        Vector2 leftRayPoint = center + Vector2.left * halfwidth;
-        Vector2 rightRayPoint = center + Vector2.right * halfwidth;
-
-        RaycastHit2D leftHit = Physics2D.Raycast(leftRayPoint, Vector2.down, groundCheckDistance, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(rightRayPoint, Vector2.down, groundCheckDistance, groundLayer);
-
-        bool wasGrounded = isGrounded;
-        isGrounded = (leftHit.collider != null) || (rightHit.collider != null);
-
-
-        if(isGrounded && !wasGrounded)
-        {
-            jumpCount = 0;
-        }
-
-        Debug.DrawRay(leftRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
-        Debug.DrawRay(rightRayPoint, Vector2.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
-    }*/
 }
