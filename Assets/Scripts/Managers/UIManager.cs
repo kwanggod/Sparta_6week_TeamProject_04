@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionPanel1;
     [SerializeField] private GameObject optionPanel2;
     [SerializeField] private GameObject uiPrefab;
-    public string SceneName { get; private set; }
 
     private void Awake()
     {
@@ -28,13 +27,6 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName)) return;
-
-        // 현재 스테이지 씬 이름 저장
-        if (sceneName.StartsWith("Stage"))
-        {
-            SceneName = sceneName;
-        }
-
         SceneManager.LoadScene(sceneName);
     }
 
