@@ -149,7 +149,7 @@ RectTransform:
   m_GameObject: {fileID: 443685228}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6666666, y: 0.6666666, z: 1}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1684353857}
@@ -1935,6 +1935,9 @@ MonoBehaviour:
   stage1Button: {fileID: 1684353858}
   stage2Button: {fileID: 935819204}
   stage3Button: {fileID: 673397854}
+  Stage1bestScoreText: {fileID: 443685230}
+  Stage2bestScoreText: {fileID: 1255361406}
+  Stage3bestScoreText: {fileID: 1090754733}
   optionButton: {fileID: 1334839261}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

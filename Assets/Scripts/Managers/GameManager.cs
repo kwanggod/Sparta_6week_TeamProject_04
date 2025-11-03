@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public float groundSpeed { get; private set; }
     public float baseGroundspeed { get; private set; }
 
+    private Dictionary<string, int> BestScores = new Dictionary<string, int>(); //씬이름과 최고점수를 저장하는 딕셔너리
+
     private void Awake()
     {
         if (instance == null)
+
         {
             instance = this;
             DontDestroyOnLoad(gameObject); //씬 전환시 파괴되지 않도록 설정
@@ -43,6 +46,21 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         IsPlaying = false;
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (BestScores.ContainsKey(currentSceneName))
+        {
+            if (score > BestScores[currentSceneName])
+            {
+                BestScores[currentSceneName] = Mathf.Max(BestScores[currentSceneName], score); //최고점수 갱신
+            }
+        }
+        else
+        {
+            BestScores.Add(currentSceneName, score);
+        }
+
+        Debug.Log($"Best Score for {currentSceneName}: {BestScores[currentSceneName]}");
     }
 
     public void SetGroundSpeed(float speed)
@@ -57,6 +75,11 @@ public class GameManager : MonoBehaviour
     public void BoostSpeed(float speed, float count)
     {
         StartCoroutine(SpeedBoost(speed, count));
+    }
+
+    public Dictionary<string, int> GetBestScores()
+    {
+        return BestScores;
     }
 
     private IEnumerator SpeedBoost(float speed, float count)
