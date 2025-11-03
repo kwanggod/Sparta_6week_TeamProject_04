@@ -14,7 +14,7 @@ public class ResultUIController : BaseUIButtonController
         RegisterButton(exitButton, OnExitPressed);
         RegisterButton(optionButton, OnOptionPressed);
     }
-    private void OnRetryPressed() => UIManager.Instance.LoadScene(UIManager.Instance.SceneName);
+    private void OnRetryPressed() => UIManager.Instance.LoadScene("MainScene");
 
     private void OnExitPressed() => UIManager.Instance.LoadScene("MainScene");
 
