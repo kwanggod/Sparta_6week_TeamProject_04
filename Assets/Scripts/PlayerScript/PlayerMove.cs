@@ -50,7 +50,6 @@ public class PlayerMove : MonoBehaviour
         originalColliderOffset = playerCollider.offset;
         currentHp = maxHp;
         isDie = false;
-
         sfxController = GetComponent<PlayerSFXController>();
         GameManager.instance.StartGame();
     }
