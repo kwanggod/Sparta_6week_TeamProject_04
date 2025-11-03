@@ -13,7 +13,7 @@ public class BackGroundMove : MonoBehaviour
 
     void Update()
     {
-        offsetX += GameManager.instance.groundSpeed*0.0001f;
-        rend.material.mainTextureOffset = new Vector2(offsetX * Time.deltaTime, 0);
+        offsetX += GameManager.instance.groundSpeed * 0.01f * Time.deltaTime;
+        rend.material.mainTextureOffset = new Vector2(offsetX, 0);
     }
 }
