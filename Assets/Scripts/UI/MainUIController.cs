@@ -28,7 +28,12 @@ public class MainUIController : BaseUIButtonController
         UpdateBestScoreUI();
     }
 
-    private void OnStageButtonPressed(string sceneName) => SceneManager.LoadScene(sceneName);
+    private void OnStageButtonPressed(string sceneName)
+    {
+        GameManager.instance.StartGame();
+        SceneManager.LoadScene(sceneName);
+
+    }
 
     private void OnOptionPressed() => UIManager.Instance.ShowLobbyOption();
 

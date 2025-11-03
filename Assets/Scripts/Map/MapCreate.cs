@@ -13,7 +13,6 @@ public class MapManager : MonoBehaviour
     {
         InitializePool();
         ActivateRandomMap();
-        GameManager.instance.StartGame();
     }
 
     void Update()
