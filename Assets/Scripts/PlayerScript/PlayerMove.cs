@@ -52,6 +52,7 @@ public class PlayerMove : MonoBehaviour
         isDie = false;
 
         sfxController = GetComponent<PlayerSFXController>();
+        GameManager.instance.StartGame();
     }
 
     // Update is called once per frame

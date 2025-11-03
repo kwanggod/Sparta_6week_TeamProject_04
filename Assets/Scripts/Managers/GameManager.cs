@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         baseGroundspeed = 5f;
         groundSpeed = baseGroundspeed;
+        Time.timeScale = 1f;
     }
 
     public void AddScore(int amount)
@@ -127,6 +128,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = originalTimeScale;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        UIManager.Instance.HideInGameOption();
+        SceneManager.LoadScene("ResultScene");
     }
 }
 
