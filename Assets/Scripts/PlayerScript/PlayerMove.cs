@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     public float invincibleDuration = 1f; // 무적 지속시간
     public float invincibleTime = 0f;
     public float hitAnimeDuration = 0.8f; // hit애니메이션 지속시간
+    private Coroutine invCoroutine = null;
 
 
     //public LayerMask groundLayer; // 레이어 설정
@@ -124,7 +125,11 @@ public class PlayerMove : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        if (isInvincible || isHit) return;
+        if (isInvincible || isHit)
+        {
+            Debug.Log("무적");
+            return;
+        }
 
         currentHp -= damage;
         if (currentHp <= 0)
@@ -132,6 +137,18 @@ public class PlayerMove : MonoBehaviour
             currentHp = 0;
 
         }
+
+        if(invCoroutine != null)
+        {
+            StopCoroutine(invCoroutine);
+
+        }
+
+        if(damage > tickDamage) // 틱뎀에 의한 무적발생 방지
+        {
+            invCoroutine = StartCoroutine(OnHitRoutine());
+        }
+        
     }
     public void Heal(int heal)
     {
