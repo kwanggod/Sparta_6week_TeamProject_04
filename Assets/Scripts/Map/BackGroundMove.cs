@@ -11,6 +11,7 @@ public class BackGroundMove : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
+        GameManager.instance.Groundgo();
     }
 
     void Update()
@@ -25,7 +26,11 @@ public class BackGroundMove : MonoBehaviour
             Time.timeScale = 0.2f;
             timer += Time.deltaTime;
             if (timer > 0.5f)
+            {
+                Time.timeScale = 1f;
                 SceneManager.LoadScene("ResultScene");
+            }
+                
         }
 
     }
