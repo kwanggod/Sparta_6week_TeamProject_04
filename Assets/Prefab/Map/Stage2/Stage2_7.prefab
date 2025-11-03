@@ -2040,7 +2040,7 @@ GameObject:
   - component: {fileID: 7425264438764247039}
   - component: {fileID: 9026359544415037067}
   m_Layer: 0
-  m_Name: Stage3_7
+  m_Name: Stage2_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
