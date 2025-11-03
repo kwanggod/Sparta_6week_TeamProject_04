@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 4989622009216895131}
   - component: {fileID: 2142261712744974999}
   m_Layer: 5
-  m_Name: OptionPanel2
+  m_Name: InGameOptionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
