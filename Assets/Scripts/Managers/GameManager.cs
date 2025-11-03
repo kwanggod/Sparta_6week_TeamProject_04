@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float baseGroundspeed { get; private set; }
 
     private Dictionary<string, int> BestScores = new Dictionary<string, int>(); //씬이름과 최고점수를 저장하는 딕셔너리
-
+    private string lastPlayedScene = "";
     private void Awake()
     {
         if (instance == null)
@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"Best Score for {currentSceneName}: {BestScores[currentSceneName]}");
+    }
+
+    public string GetLastPlayedScene()
+    {
+        return lastPlayedScene;
     }
 
     public void SetGroundSpeed(float speed)
