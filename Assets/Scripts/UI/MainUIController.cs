@@ -19,7 +19,7 @@ public class MainUIController : BaseUIButtonController
         RegisterButton(optionButton, OnOptionPressed);
     }
 
-    private void OnStageButtonPressed(string sceneName) => SceneManager.LoadScene(sceneName);
+    private void OnStageButtonPressed(string sceneName) => UIManager.Instance.LoadScene(sceneName);
 
     private void OnOptionPressed() => UIManager.Instance.ShowLobbyOption();
 }
