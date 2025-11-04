@@ -18,7 +18,6 @@ public class PlayerMove : MonoBehaviour
     public float currentHp;
     public float tickRate = 1f;
     public int tickDamage = 1;
-    private float tickTimer = 0f;
     private BoxCollider2D playerCollider;
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
