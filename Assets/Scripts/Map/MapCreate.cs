@@ -16,7 +16,7 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        if (currentMap != null && currentMap.transform.position.x <= 0f)
+        if (currentMap != null && currentMap.transform.position.x <= 0.1f)
         {
             ActivateRandomMap();
         }
