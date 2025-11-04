@@ -10,7 +10,7 @@
 ## 💁‍♂️ 프로젝트 팀원 및 역할
 |**팀원**| <img width="48" height="48" alt="백광렬" src="https://github.com/user-attachments/assets/697c47d9-5a48-4442-a758-0348c529998f" /> <br>(팀장)백광렬 |<img width="48" height="48" alt="1-35-63-403" src="https://github.com/user-attachments/assets/c81f119b-0c80-4bef-91c6-94313bb06b36" /> <br>**오정훈**| <img width="48" height="48" alt="강동현" src="https://github.com/user-attachments/assets/4396254c-cbcd-448d-90a1-9e9950aa6701" /> <br>강동현|<img width="48" height="48" alt="이하람" src="https://github.com/user-attachments/assets/4fcca52b-1165-4b1f-a9c8-4aea4d4c4d76" /> <br>이하람 | <img width="48" height="48" alt="임성규" src="https://github.com/user-attachments/assets/af575d83-3d47-4545-9f81-b5c9d39bc287" /> <br>임성규|
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|**역할**|맴 디자인<br> 아이템| 사운드 | 발표, UI| 기획, 스테이지<br>시작화면|캐릭터(플레이어)|
+|**역할**|맵 디자인<br> 아이템| 기획, 스테이지<br>시작화면 | 사운드 | 발표, UI |캐릭터(플레이어)|
 <br>
 
 ---
@@ -153,3 +153,197 @@ IEnumerator OnHitRoutine()
 
 <br>
 
+### 배경 무한 스크롤
+- 머티리얼을 이용해 오프셋x갑3ㅅ 변경으로 무한으로 이어지는것 처럼 보여지는 백그라운드 로직
+
+```
+private Renderer rend;
+float offsetX = 0f;
+void Start()
+{
+    rend = GetComponent<Renderer>();
+}
+void Update()
+{
+    offsetX += GameManager.instance.groundSpeed * 0.01f * Time.deltaTime;
+    rend.material.mainTextureOffset = new Vector2(offsetX, 0);
+}
+```
+|배경 무한 스크롤|
+|:---:|
+|![배경 무한 스크롤](https://github.com/user-attachments/assets/4f52e4c2-8b5d-4109-8716-faf089917613)|
+
+
+<br>
+
+### 맵 오브젝트 폴링
+- 배열 안에 프리팹을 넣고 생성, 비활성화 후
+- 특정 조건 시 리스트에 있는 프리팹을 랜덤으로 활성화
+
+```
+  using UnityEngine;
+using System.Collections.Generic;
+public class MapManager : MonoBehaviour
+{
+    public GameObject[] mapPrefabs;
+    private List<GameObject> mapPool = new List<GameObject>();
+    private float spawnX = 60f;
+    private GameObject currentMap;
+    void Start()
+    {
+        InitializePool();
+        ActivateRandomMap();
+    }
+    void Update()
+    {
+        if (currentMap != null && currentMap.transform.position.x <= 0f)
+        {
+            ActivateRandomMap();
+        }
+    }
+    void InitializePool()
+    {
+        for (int i = 0; i < mapPrefabs.Length; i++)
+        {
+            GameObject obj = Instantiate(mapPrefabs[i], transform);
+            obj.SetActive(false);
+            mapPool.Add(obj);
+        }
+    }
+    void ActivateRandomMap()
+    {
+        GameObject map = GetInactiveMap();
+        if (map != null)
+        {
+            map.transform.localPosition = new Vector3(spawnX, 0, 0);
+            map.SetActive(true);
+            currentMap = map;
+        }
+    }
+    GameObject GetInactiveMap()
+    {
+        List<GameObject> inactiveMaps = new List<GameObject>();
+        foreach (GameObject obj in mapPool)
+        {
+            if (!obj.activeInHierarchy)
+                inactiveMaps.Add(obj);
+        }
+        if (inactiveMaps.Count > 0)
+        {
+            int randIndex = Random.Range(0, inactiveMaps.Count);
+            return inactiveMaps[randIndex];
+        }
+        return null;
+    }
+}
+
+  ```
+
+-----
+
+- 타일맵의 스프라이트 이름을 가져와 효과를 적용시키고 해당 위치의 타일맵을 삭제하는 로직
+
+```
+  private void OnTriggerStay2D(Collider2D other)
+{
+    if (other.CompareTag("Player"))
+    {
+        if (GameManager.instance.IsPlaying)
+        {
+            Bounds bounds = other.bounds;
+            Vector3 min = bounds.min;
+            Vector3 max = bounds.max;
+            for (float x = min.x; x <= max.x; x += 0.3f)
+            {
+                for (float y = min.y; y <= max.y; y += 0.3f)
+                {
+                    Vector3Int cellPos = itemTilemap.WorldToCell(new Vector3(x, y, 0));
+                    TileBase tile = itemTilemap.GetTile(cellPos);
+                    if (tile == null) continue;
+                    string tileName = tile.name;
+                    switch (tileName)
+                    {
+                        case "gem_blue":
+                            GameManager.instance.AddScore(1000);
+                            break;
+                        case "gem_red":
+                            GameManager.instance.AddScore(5000);
+                            break;
+                        case "gem_green":
+                            GameManager.instance.AddScore(10000);
+                            break;
+                        case "gem_yellow":
+                            GameManager.instance.AddScore(15000);
+                            break;
+                        case "conveyor":
+                            GameManager.instance.BoostSpeed(4f, 2f);
+                            break;
+                        case "hud_heart":
+                            other.GetComponent<PlayerMove>().Heal(10);
+                            break;
+                    }
+                    sfx?.PlayItemSound();
+                    itemTilemap.SetTile(cellPos, null);
+                }
+            }
+        }
+    }
+}
+
+  ```
+
+|오브젝트 풀링|
+|:---:|
+|![20251104-1102-11 0874801](https://github.com/user-attachments/assets/18cde563-b8fc-41d2-b719-59a4d8d98741)|
+
+<br>
+
+### UI 버튼 공통 컨트롤러
+- 모든 UI 컨트롤러에서 **상속받는 부모 클래스**
+- 버튼을 등록하고, 씬 전환 시 자동으로 리스너를 해체하도록 구현되어 이벤트 중복 실행이나 누락을 방지
+
+```
+public abstract class BaseUIButtonController : MonoBehaviour
+{
+    // 버튼과 그 버튼이 눌렸을 때 실행할 Action을 저장하는 클래스
+    private class ButtonListener
+    {
+        public Button button;
+        public UnityEngine.Events.UnityAction action;
+    }
+    private readonly List<ButtonListener> buttonListeners = new List<ButtonListener>();
+    // 버튼을 안전하게 등록하는 함수
+    protected void RegisterButton(Button button, UnityEngine.Events.UnityAction action)
+    {
+        if (button == null)
+        {
+            //Debug.LogWarning($"{name}: 등록하려는 버튼이 null입니다!");
+            return;
+        }
+        button.onClick.AddListener(action);
+        buttonListeners.Add(new ButtonListener { button = button, action = action });
+    }
+    // 모든 등록된 버튼 리스너를 해제
+    protected virtual void OnDestroy()
+    {
+        foreach (var listener in buttonListeners)
+        {
+            if (listener.button != null)
+                listener.button.onClick.RemoveListener(listener.action);
+        }
+        buttonListeners.Clear();
+    }
+}
+```
+
+----
+
+## ⚙️ 개발 환경 및 기술 스택
+- **엔진** : Unity 2022.3.62f2
+- **언어** : C#
+- **버전 관리** : Git / GitHub
+- **협업 툴** : ZEP / Slack
+- **플랫폼** : PC,Mobile
+
+  <br>
+  <br>
