@@ -64,10 +64,13 @@
 |:---:|:---:|
 |![Jump](https://github.com/user-attachments/assets/989d2c2f-3081-4914-a822-58cd614ea2df)| ![Slide](https://github.com/user-attachments/assets/0da77af1-f1c0-42b6-a9a4-b249c314da1e) |
 
-<br>
 
--플레이어가 장애물에 부딪히면 Hp가 감소하고 일시적으로 무적상태가 됩니다.
+### 피격 & 무적 상태
 
+ - 플레이어가 장애물에 부딪히면 Hp가 감소하고 일시적으로 무적상태가 됩니다.
+ 
+   <br>
+```
     public void TakeDamage(int damage)
     {
     if (isInvincible || isHit)
@@ -99,8 +102,10 @@
     }
 
     }
-------------------------------------------------------------------------------
-    IEnumerator OnHitRoutine()
+```
+-----
+```
+IEnumerator OnHitRoutine()
     {
     isHit = true;
     isInvincible = true;
@@ -112,9 +117,21 @@
     yield return new WaitForSeconds(invincibleDuration - hitAnimeDuration); // anim 시간 이후 남은 무적시간 지속
     isInvincible = false;
     }
+```
 
--플레이어의 Hp가 0이 되면 사망하며 결과창으로 이동합니다.
+|충돌 모션|
+|:---:|
+|![Bump](https://github.com/user-attachments/assets/9bdb6c98-4014-4bd1-bfb2-1786075a8303)|
 
+<br>
+
+    
+### 사망 처리 & 결과창 이동
+- Hp가 0이 되면 사망하며 결과창으로 이동합니다.
+
+<br>
+
+```
      public void Die()
     {
      if (isDie) return;
@@ -129,3 +146,10 @@
      sfxController?.PlayDieSFX();
      GameManager.instance.EndGame();
     }
+```
+|사망 & 결과창 전환|
+|:---:|
+|![DieResult](https://github.com/user-attachments/assets/c76ea744-dc1f-4c46-84d6-6045c1dd323d)|
+
+<br>
+
